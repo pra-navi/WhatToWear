@@ -26,9 +26,6 @@ const WardrobeRow = ({rowName, addFunc, clothesArr}) => {
     const handleOpen = () => setOpenForm(true);
     const handleClose = () => setOpenForm(false);
 
-    console.log(rowName);
-    console.log(clothesArr);
-
     return (
         <>
             <Paper className={classes.row} elevation={6}>
@@ -40,7 +37,7 @@ const WardrobeRow = ({rowName, addFunc, clothesArr}) => {
                         </IconButton>
                     </div>
                 </div>
-                <Hangers clothesArr={clothesArr}/> 
+                <Hangers rowName={rowName} clothesArr={clothesArr}/> 
             </Paper>
             <Modal
                 open={openForm}

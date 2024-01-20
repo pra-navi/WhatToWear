@@ -11,13 +11,12 @@ const Wardrobe = () => {
   const dispatch = useDispatch();
 
   const userId = JSON.parse(localStorage.getItem('profile'))?.result._id;
-  /*
+  
   useEffect(() => {
     dispatch(getTops(userId));
     dispatch(getBottoms(userId));
     dispatch(getFull(userId));
   }, []);
-  */
 
   const { tops, bottoms, fullOutfits } = useSelector((state) => state.wardrobe);
 
