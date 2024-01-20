@@ -1,8 +1,10 @@
-import { UPDATE } from '../constants/actions';
+import { GET_CURR, GET_PREV, UPDATE } from '../constants/actions';
 
 const outfitsReducer = (state = { lastM: [], lastTu: [], lastW: [], lastTh: [], lastF: [], lastSa: [], lastSu: [], M: [], Tu: [], W: [], Th: [], F: [], Sa: [], Su: [] }, action) => {
     switch (action.type) {
         case UPDATE:
+        case GET_CURR: 
+        case GET_PREV:
             return {
                 ...state,
                 lastM: action.payload.lastM,
