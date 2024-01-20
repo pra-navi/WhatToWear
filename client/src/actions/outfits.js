@@ -1,5 +1,25 @@
-import { GET_BOTTOM, GET_CURR, GET_FULL, GET_PREV, GET_TOP } from '../constants/actions';
+import { GET_BOTTOM, GET_CURR, GET_FULL, GET_PREV, GET_TOP, UPDATE } from '../constants/actions';
 import * as api from '../api';
+
+export const refresh = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.refresh(id);
+
+        dispatch({ type: UPDATE, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const update = (outfitType, clothesId, userId, day) => async (dispatch) => {
+    try {
+        const { data } = await api.update(outfitType, clothesId, userId, day);
+
+        dispatch({ type: UPDATE, payload: data });
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const getTops = (userId) => async (dispatch) => {
     try {
