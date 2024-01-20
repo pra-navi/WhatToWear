@@ -2,11 +2,11 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-import Bottoms from '../models/bottoms';
-import CurrentOutfits from '../models/currentOutfits';
-import FullOutfits from '../models/fullOutfits';
-import Tops from '../models/tops';
-import Users from '../models/users';
+import Bottoms from '../models/bottoms.js';
+import CurrentOutfits from '../models/currentOutfits.js';
+import FullOutfits from '../models/fullOutfits.js';
+import Tops from '../models/tops.js';
+import Users from '../models/user.js';
 
 export const getAllTops = async (req, res) => {
     const { userId } = req.body;
