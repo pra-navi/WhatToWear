@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem, Input, Typography, Box } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Typography,
+  Box,
+  Switch,
+  Button,
+} from '@mui/material';
 import { getTops, getBottoms, getCurr, getFull, getPrev } from '../../actions/outfits';
 import { useDispatch, useSelector } from 'react-redux';
 import { getState } from 'redux';
 
 const Outfits = () => {
-  const [currTop, setCurrTop] = useState([]); // 1-piece will be considered a top
+  const [currTop, setCurrTop] = useState([]);
   const [lastTop, setLastTop] = useState([]);
   const [currBottom, setCurrBottom] = useState([]);
   const [lastBottom, setLastBottom] = useState([]);
@@ -13,11 +22,13 @@ const Outfits = () => {
   const [currDay, setCurrDay] = useState([]);
   const [lastDay, setLastDay] = useState([]);
   const [open, setOpen] = useState(false);
+  const [showLastWeekSingleImage, setShowLastWeekSingleImage] = useState(false);
+  const [showThisWeekSingleImage, setShowThisWeekSingleImage] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
   const { outfits } = useSelector((state) => state.outfits);
 
   const user = JSON.parse(localStorage.getItem('profile'));
-
   // const setOutfits = () => {
     // sets both current and last week's outfits upon opening
     // req: userId, day
@@ -38,7 +49,6 @@ const Outfits = () => {
   // reset week button
 
   const placeholderImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png';
-  
   const handleLastDayChange = async (event) => {
     const newLastDay = event.target.value;
     setLastDay(newLastDay);
@@ -56,19 +66,28 @@ const Outfits = () => {
       console.log(error);
     }
   };
-  
+
   const handleCurrDayChange = (event) => {
     setCurrDay(event.target.value);
   };
 
   const handleTopClick = () => {
-    console.log("Top clicked");
+    console.log('Top clicked');
     setOpen(true);
-  }
+  };
 
   const handleBottomClick = () => {
-    console.log("Bottom clicked");
-  }
+    console.log('Bottom clicked');
+  };
+
+  const toggleThisWeekImages = () => {
+    setShowThisWeekSingleImage(!showThisWeekSingleImage);
+  };
+
+  //logic
+  const handleRefreshClick = () => {
+    setRefresh(!refresh);
+  };
 
   return (
     <Box style={{ display: 'flex', justifyContent:'center' }}>
@@ -89,36 +108,50 @@ const Outfits = () => {
             label="Day"
             onChange={handleLastDayChange}
           >
-            <MenuItem value={'lastM'}>Monday</MenuItem>
-            <MenuItem value={'lastTu'}>Tuesday</MenuItem>
-            <MenuItem value={'lastW'}>Wednesday</MenuItem>
-            <MenuItem value={'lastTh'}>Thursday</MenuItem>
-            <MenuItem value={'lastF'}>Friday</MenuItem>
-            <MenuItem value={'lastSa'}>Saturday</MenuItem>
-            <MenuItem value={'lastSu'}>Sunday</MenuItem>
+            <MenuItem value={'M'}>Monday</MenuItem>
+            <MenuItem value={'Tu'}>Tuesday</MenuItem>
+            <MenuItem value={'W'}>Wednesday</MenuItem>
+            <MenuItem value={'Th'}>Thursday</MenuItem>
+            <MenuItem value={'F'}>Friday</MenuItem>
+            <MenuItem value={'Sa'}>Saturday</MenuItem>
+            <MenuItem value={'Su'}>Sunday</MenuItem>
+          
           </Select>
         </FormControl>
-
       </Box>
-      <Box style={{
-        display: 'flex',
-        flexDirection: 'column',
-        marginLeft: '15%'
-      }}>
-        <Typography variant="h4" align="center">This Week</Typography>
-        <div>
-          <img
-            src={placeholderImg}
-            onClick={handleTopClick}
-            alt='Top picture' />
-        </div>
-        <div>
-          <img
-            src={placeholderImg}
-            onClick={handleBottomClick}
-            alt='Bottom picture' />
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          marginLeft: '15%',
+        }}
+      >
+        <Typography variant="h4" align="center">
+          This Week
+        </Typography>
+        {showThisWeekSingleImage ? (
+          <div>
+            <img src={placeholderImg} alt="This week outfit" />
           </div>
-        <FormControl sx={{marginTop: '20px'}}>
+        ) : (
+          <>
+            <div>
+              <img
+                src={placeholderImg}
+                onClick={handleTopClick}
+                alt="Top picture"
+              />
+            </div>
+            <div>
+              <img
+                src={placeholderImg}
+                onClick={handleBottomClick}
+                alt="Bottom picture"
+              />
+            </div>
+          </>
+        )}
+        <FormControl sx={{ marginTop: '20px' }}>
           <InputLabel id="currWeekDay">Day</InputLabel>
           <Select
             labelId="currWeekDayLabel"
@@ -134,11 +167,33 @@ const Outfits = () => {
             <MenuItem value={'F'}>Friday</MenuItem>
             <MenuItem value={'Sa'}>Saturday</MenuItem>
             <MenuItem value={'Su'}>Sunday</MenuItem>
+          
           </Select>
         </FormControl>
-      </Box>
-    </Box>
-  )
-}
 
-export default Outfits
+        <Switch
+          checked={showThisWeekSingleImage}
+          onChange={toggleThisWeekImages}
+          color="primary"
+        />
+      </Box>
+      <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end', 
+        marginTop: '20px',
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        }}
+>
+  <Button variant="contained" onClick={handleRefreshClick}>
+    Refresh
+  </Button>
+</Box>
+    </Box>
+  );
+};
+
+export default Outfits;

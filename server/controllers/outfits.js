@@ -7,6 +7,7 @@ import CurrentOutfits from '../models/currentOutfits.js';
 import FullOutfits from '../models/fullOutfits.js';
 import Tops from '../models/tops.js';
 import Users from '../models/user.js';
+import fullOutfits from '../models/fullOutfits.js';
 
 export const getAllTops = async (req, res) => {
     const { userId } = req.query;
@@ -76,23 +77,73 @@ export const getPrevOutfits = async (req, res) => {
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
+        let result = [];
 
         if(outfits){ 
 
             if (day === "lastM") {
                 getOutfit = outfits.lastM;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastTu") {
                 getOutfit = outfits.lastTu;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastW") {
                 getOutfit = outfits.lastW;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastTh") {
                 getOutfit = outfits.lastTh;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastF") {
                 getOutfit = outfits.lastF;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastSa") {
                 getOutfit = outfits.lastSa;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "lastSu") {
                 getOutfit = outfits.lastSu;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else {
                 res.status(400).json({ message: "Invalid day." });
             }
@@ -100,9 +151,7 @@ export const getPrevOutfits = async (req, res) => {
             res.json({ message : "Invalid outfit." });
         }
 
-        console.log(getOutfit);
-
-        res.status(200).json(getOutfit);
+        res.status(200).json(result);
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -115,23 +164,73 @@ export const getCurrOutfits = async (req, res) => {
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
+        let result = [];
 
         if(outfits){ 
 
             if (day === "M") {
                 getOutfit = outfits.M;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "Tu") {
                 getOutfit = outfits.Tu;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "W") {
                 getOutfit = outfits.W;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "Th") {
                 getOutfit = outfits.Th;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "F") {
                 getOutfit = outfits.F;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "Sa") {
                 getOutfit = outfits.Sa;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else if (day === "Su") {
                 getOutfit = outfits.Su;
+                result.push([getOutfit[0]]);
+                const top = await Tops.findById(getOutfit[1]);
+                result.push(top);
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                result.push(bottom);
+                const full = await fullOutfits.findById(getOutfit[3]);
+                result.push(full);
             } else {
                 res.status(400).json({ message: "Invalid day." });
             }
@@ -139,7 +238,7 @@ export const getCurrOutfits = async (req, res) => {
             res.json({ message : "Invalid outfit." });
         }
 
-        res.status(200).json(getOutfit);
+        res.status(200).json(result);
 
     } catch (error) {
         res.status(404).json({ message: error.message });
