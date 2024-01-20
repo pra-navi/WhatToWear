@@ -137,11 +137,11 @@ const Outfits = () => {
           <Grid item key={index} xs={12} sm={12} md={12} lg={2}>
             <Card>
               <CardActionArea onClick={() => {
-                if (type == 'top') {
+                if (type === 'top') {
                   handleTopSelect(image);
-                } else if (type == 'bottom') {
+                } else if (type === 'bottom') {
                   handleBottomSelect(image);
-                } else if (type == 'full') {
+                } else if (type === 'full') {
                   handleFullSelect(image);
                 }
                 }}>
