@@ -11,4 +11,6 @@ API.interceptors.request.use((req) => {
 
 export const logIn = (formData) => API.post('/user/login', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
-export const fetchUser = (id) => API.get(`/user/profile/${id}`);
+
+export const refresh = (id) => API.patch('/outfits/refresh', id); // id is of type string in a the req body
+export const update = (outfitType, clothesId, userId, day) => API.patch(`/outfits/update`, { outfitType, clothesId, userId, day }); // all are of type string (outfitType is top/bottom/full) (day is M/Tu/W/Th/F/Sa/Su)
