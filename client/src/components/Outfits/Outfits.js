@@ -40,6 +40,7 @@ const Outfits = () => {
       try {
         const data = await dispatch(getTops(userId));
         setTopImages(data);
+        console.log("top images: " + setTopImages);
       } catch (error) {
         console.log(error);
       }
@@ -107,7 +108,26 @@ const Outfits = () => {
   };
 
   const handleCurrDayChange = (event) => {
-    setCurrDay(event.target.value);
+    const newCurrDay = event.target.value;
+    setCurrDay(newCurrDay);
+
+    try {     
+      const data = dispatch(getCurr({ day: newCurrDay, userId: user.result._id}));
+      if (data[1][1] === "" && data[3][1] === "") {
+        setCurrTop(placeholderImg);
+        setCurrBottom(placeholderImg);
+      }
+
+      if (data[0][0] === "1") {
+        setCurrTop(data[3]);
+        setCurrBottom([]);
+      } else {
+        setCurrTop(data[1]);
+        setCurrBottom(data[2]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleTopClick = (event) => {
@@ -162,10 +182,13 @@ const Outfits = () => {
       // Assuming the selectedImage has _id and image properties
       if (type === 'top') {
         dispatch(update('top', selectedImage._id, userId, currDay));
+        setCurrTop(selectedImage.image);
       } else if (type === 'bottom') {
         dispatch(update('bottom', selectedImage._id, userId, currDay));
+        setCurrBottom(selectedImage.image);
       } else if (type === 'full') {
         dispatch(update('full', selectedImage._id, userId, currDay));
+        setCurrFull(selectedImage.image);
       }
     };
 
@@ -282,7 +305,7 @@ const Outfits = () => {
                     aria-controls={openTop ? 'tops-menu' : undefined}
                   >
                   <img
-                    src={currTop}
+                    src={currTop.length > 0 ? currTop : placeholderImg}
                     alt='Click to choose a top' />
                   </IconButton>
                 </div>
@@ -307,7 +330,7 @@ const Outfits = () => {
                     aria-controls={openBottom ? 'bottoms-menu' : undefined}
                   >
                     <img
-                      src={currBottom}
+                      src={currBottom.length > 0 ? currBottom : placeholderImg}
                       alt='Click to choose a bottom' />
                   </IconButton>
                 </div>
