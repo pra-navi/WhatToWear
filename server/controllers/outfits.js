@@ -74,30 +74,30 @@ export const getPrevOutfits = async (req, res) => {
     const { day , userId } = req.body;
 
     try {
-        const outfits = await CurrentOutfits.findOne({userId});
+        const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
 
         if(outfits){ 
 
-            if (day == "M") {
+            if (day === "M") {
                 getOutfit = outfits.lastM;
-            } else if (day == "Tu") {
+            } else if (day === "Tu") {
                 getOutfit = outfits.lastTu;
-            } else if (day == "W") {
+            } else if (day === "W") {
                 getOutfit = outfits.lastW;
-            } else if (day == "Th") {
-                getOutfit == outfits.lastTh;
-            } else if (day == "F") {
+            } else if (day === "Th") {
+                getOutfit = outfits.lastTh;
+            } else if (day === "F") {
                 getOutfit = outfits.lastF;
-            } else if (day == "Sa") {
+            } else if (day === "Sa") {
                 getOutfit = outfits.lastSa;
-            } else if (day = "Su") {
+            } else if (day === "Su") {
                 getOutfit = outfits.lastSu;
             } else {
-                res.json({ message : "Invalid day." });
+                res.status(400).json({ message: "Invalid day." });
             }
         } else {
-            res.json({ message : "Invalid day." });
+            res.json({ message : "Invalid outfit." });
         }
 
         res.status(200).json(getOutfit);
@@ -111,30 +111,30 @@ export const getCurrOutfits = async (req, res) => {
     const { day , userId } = req.body;
 
     try {
-        const outfits = await CurrentOutfits.findOne({userId});
+        const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
 
         if(outfits){ 
 
-            if (day == "M") {
+            if (day === "M") {
                 getOutfit = outfits.M;
-            } else if (day == "Tu") {
+            } else if (day === "Tu") {
                 getOutfit = outfits.Tu;
-            } else if (day == "W") {
+            } else if (day === "W") {
                 getOutfit = outfits.W;
-            } else if (day == "Th") {
-                getOutfit == outfits.Th;
-            } else if (day == "F") {
+            } else if (day === "Th") {
+                getOutfit = outfits.Th;
+            } else if (day === "F") {
                 getOutfit = outfits.F;
-            } else if (day == "Sa") {
+            } else if (day === "Sa") {
                 getOutfit = outfits.Sa;
-            } else if (day = "Su") {
+            } else if (day === "Su") {
                 getOutfit = outfits.Su;
             } else {
-                res.json({ message : "Invalid day." });
+                console.log("Invalid day.");
             }
         } else {
-            res.json({ message : "Invalid day." });
+            console.log("Invalid outfit.");
         }
 
         res.status(200).json(getOutfit);
@@ -146,11 +146,9 @@ export const getCurrOutfits = async (req, res) => {
 
 export const update = async (req, res) => {
     const { outfitType, clothesId, userId, day } = req.body;
-    console.log(outfitType, clothesId, userId, day);
 
     try {
         const currentOutfits = await CurrentOutfits.findOne({ userId });
-        console.log(currentOutfits);
         if (currentOutfits) {
             let toUpdate;
             if (day === "M") {
@@ -170,7 +168,6 @@ export const update = async (req, res) => {
             } else {
                 res.json({ message: 'Day is incorrect.' })
             }
-            console.log(toUpdate); // ["2", "", "", ""]
 
             if (outfitType === "top") {
                 toUpdate[0] = "2";
@@ -190,7 +187,6 @@ export const update = async (req, res) => {
             }
 
             await currentOutfits.save();
-            console.log(currentOutfits);
 
             res.json({ message: "User updated successfully." })
             
