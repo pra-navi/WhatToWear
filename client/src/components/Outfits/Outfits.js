@@ -151,11 +151,16 @@ const Outfits = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
   };
 
+  //refresh function
   const handleRefreshClick = async () => {
-    const data = await dispatch(refresh(user.result._id));
-    console.log(data);
+    try {
+      const data = await dispatch(refresh(user.result._id));
+      console.log(data);
+    } catch (error) {
+      console.error("Error during refresh:", error);
+    }
   };
-
+  
   const ImageMenu = ({ type, images }) => {
     const dispatch = useDispatch();
     const handleImageSelect = (selectedImage) => {
