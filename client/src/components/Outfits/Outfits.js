@@ -42,9 +42,9 @@ const Outfits = () => {
     console.log('Bottom clicked');
   };
 
-  const toggleLastWeekImages = () => {
-    setShowLastWeekSingleImage(!showLastWeekSingleImage);
-  };
+  // const toggleLastWeekImages = () => {
+  //   setShowLastWeekSingleImage(!showLastWeekSingleImage);
+  // };
 
   const toggleThisWeekImages = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
@@ -62,11 +62,7 @@ const Outfits = () => {
         <Typography variant="h4" align="center">
           Last Week
         </Typography>
-        <Switch
-          checked={showLastWeekSingleImage}
-          onChange={toggleLastWeekImages}
-          color="primary"
-        />
+        
         {showLastWeekSingleImage ? (
           <div>
             <img src={placeholderImg} alt="Last week outfit" />
