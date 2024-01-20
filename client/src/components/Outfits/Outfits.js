@@ -9,7 +9,7 @@ import {
   Switch,
   Button,
 } from '@mui/material';
-import { getTops, getBottoms, getCurr, getFull, getPrev } from '../../actions/outfits';
+import { getTops, getBottoms, getCurr, getFull, getPrev, refresh, update } from '../../actions/outfits';
 import { useDispatch, useSelector } from 'react-redux';
 import { getState } from 'redux';
 
@@ -22,9 +22,7 @@ const Outfits = () => {
   const [currDay, setCurrDay] = useState([]);
   const [lastDay, setLastDay] = useState([]);
   const [open, setOpen] = useState(false);
-  const [showLastWeekSingleImage, setShowLastWeekSingleImage] = useState(false);
   const [showThisWeekSingleImage, setShowThisWeekSingleImage] = useState(false);
-  const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
   const { outfits } = useSelector((state) => state.outfits);
 
@@ -42,12 +40,6 @@ const Outfits = () => {
     // open pop-up
   // }
 
-  // last week view outfit
-
-  // select day
-
-  // reset week button
-
   const placeholderImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png';
   const handleLastDayChange = async (event) => {
     const newLastDay = event.target.value;
@@ -61,7 +53,6 @@ const Outfits = () => {
         setLastTop(data[1][1]);
         setLastBottom(data[2][1]);
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -84,9 +75,9 @@ const Outfits = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
   };
 
-  //logic
-  const handleRefreshClick = () => {
-    setRefresh(!refresh);
+  const handleRefreshClick = async () => {
+    const data = await dispatch(refresh(user.result._id));
+    console.log(data);
   };
 
   return (
@@ -97,8 +88,8 @@ const Outfits = () => {
         marginRight: '15%'
       }}>       
         <Typography variant="h4" align="center">Last Week</Typography>
-        <div><img src={lastTop.length > 0 ? lastTop[0] : placeholderImg} alt='Top picture' /></div>
-        <div><img src={placeholderImg} alt='Bottom picture' /></div>
+        <div><img src={lastTop.length > 0 ? lastTop : placeholderImg} alt='Top picture' /></div>
+        <div><img src={lastBottom.length > 0 ? lastBottom : placeholderImg} alt='Bottom picture' /></div>
         <FormControl sx={{marginTop: '20px'}}>
         <InputLabel id="lastWeekDayLabel">Day</InputLabel>     
           <Select

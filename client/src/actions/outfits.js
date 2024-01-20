@@ -6,6 +6,7 @@ export const refresh = (id) => async (dispatch) => {
         const { data } = await api.refresh(id);
 
         dispatch({ type: UPDATE, payload: data });
+        return data;
     } catch (error) {
         console.log(error);
     }
