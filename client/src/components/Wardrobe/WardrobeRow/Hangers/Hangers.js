@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from './styles';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton, Divider } from '@material-ui/core';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 /**
@@ -19,11 +19,11 @@ const Hangers = () => {
                     <ImageListItem key={item.img}>
                         <img src={item.img} alt={item.title} />
                         <ImageListItemBar
-                            title={item.title}
-                            classes={{
-                                root: classes.titleBar,
-                                title: classes.title,
-                            }}
+                            // title={item.title}
+                            // classes={{
+                            //     root: classes.titleBar,
+                            //     title: classes.title,
+                            // }}
                             actionIcon={
                                 <IconButton aria-label={`star ${item.title}`} onClick={deleteFunc}>
                                     <DeleteIcon className={classes.title} />

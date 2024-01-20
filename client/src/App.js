@@ -16,7 +16,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route path='/' exact component={() => (JSON.parse(localStorage.getItem('profile')) ? <Home /> : <Redirect to="/authentication" />)} />
-            <Route path='/outfits' component={() => (JSON.parse(localStorage.getItem('profile')) ? <Outfits /> : <Redirect to="/authentication" />)} />
+            <Route path='/outfits' component={Outfits} />
             <Route path='/wardrobe' component={() => (JSON.parse(localStorage.getItem('profile')) ? <Wardrobe /> : <Redirect to="/authentication" />)} />
             <Route path='/authentication' component={() => (!JSON.parse(localStorage.getItem('profile')) ? <Auth /> : <Redirect to="/" />)} />
           </Switch>
