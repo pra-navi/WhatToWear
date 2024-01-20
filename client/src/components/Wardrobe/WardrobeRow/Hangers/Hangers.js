@@ -1,23 +1,32 @@
 import React from 'react'
 import useStyles from './styles';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@material-ui/core';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 /**
  * @author https://v4.mui.com/components/image-list/ 
  */
 
-const Hangers = ({rowName}) => {
+const Hangers = ({rowName, clothesArr}) => {
     const classes = useStyles();
 
-    const deleteFunc = () => {console.log("hangers");}
+    const deleteFunc = () => {alert("Feature Coming Soon!");}
+
+    console.log(rowName);
+    console.log(clothesArr);
+
+    if(clothesArr.length === 0) {
+      return (
+        <Typography variant="h5" component="h2">There's nothing in your {rowName}</Typography>
+      )
+    }
 
     return (
         <div className={classes.root}>
             <ImageList className={classes.imageList} cols={2.5}>
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img}>
-                        <img src={item.img} alt={item.title} />
+                {clothesArr.map((item) => (
+                    <ImageListItem key={item._id}>
+                        <img src={item.image} alt={item._id} className={classes.image}/>
                         <ImageListItemBar
                             // title={item.title}
                             // classes={{
@@ -25,7 +34,7 @@ const Hangers = ({rowName}) => {
                             //     title: classes.title,
                             // }}
                             actionIcon={
-                                <IconButton aria-label={`star ${item.title}`} onClick={deleteFunc}>
+                                <IconButton aria-label={`star ${item._id}`} onClick={deleteFunc}>
                                     <DeleteIcon className={classes.title} />
                                 </IconButton>
                             }
