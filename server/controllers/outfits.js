@@ -74,7 +74,7 @@ export const getAllFulls = async (req, res) => {
 }       
 
 export const getPrevOutfits = async (req, res) => {
-    const { day, userId } = req.body;
+    const { day, userId } = req.query;
 
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
@@ -103,13 +103,34 @@ export const getPrevOutfits = async (req, res) => {
             }
 
             result.push([getOutfit[0]]);
-            const top = await Tops.findById(getOutfit[1]);
-            result.push(top);
-            const bottom = await Bottoms.findById(getOutfit[2]);
-            result.push(bottom);
-            const full = await fullOutfits.findById(getOutfit[3]);
-            result.push(full);
+            if(getOutfit[1] == ""){
+                result.push(["", ""]);
+            } else {
+                const top = await Tops.findById(getOutfit[1]);
+                let temp = [];
+                temp.push(top._id);
+                temp.push(top.image);
+                result.push(temp);
+            }
 
+            if(getOutfit[2] == ""){
+                result.push(["", ""]);
+            } else {
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                let temp = [];
+                temp.push(bottom._id);
+                temp.push(bottom.image);
+                result.push(temp);            }
+
+            if(getOutfit[3] == ""){
+                result.push(["", ""]);
+            } else {
+                const full = await fullOutfits.findById(getOutfit[3]);
+                let temp = [];
+                temp.push(full._id);
+                temp.push(full.image);
+                result.push(temp);            
+            }
             res.status(200).json(result);
         } else {
             console.log("Invalid outfit.");
@@ -123,7 +144,7 @@ export const getPrevOutfits = async (req, res) => {
 }
 
 export const getCurrOutfits = async (req, res) => {
-    const { day, userId } = req.body;
+    const { day , userId } = req.query;
 
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
@@ -153,11 +174,20 @@ export const getCurrOutfits = async (req, res) => {
 
             result.push([getOutfit[0]]);
             const top = await Tops.findById(getOutfit[1]);
-            result.push(top);
+            let temp = []; 
+            temp.push(top[0]);
+            temp.push(top[1]);
+            result.push(temp);
             const bottom = await Bottoms.findById(getOutfit[2]);
-            result.push(bottom);
+            let temp1 = []; 
+            temp1.push(bottom[0]);
+            temp1.push(bottom[1]);
+            result.push(temp1);
             const full = await fullOutfits.findById(getOutfit[3]);
-            result.push(full);
+            let temp2 = []; 
+            temp2.push(full[0]);
+            temp2.push(full[1]);
+            result.push(temp2);
 
             res.status(200).json(result);
         } else {
@@ -170,7 +200,6 @@ export const getCurrOutfits = async (req, res) => {
         res.status(500).json({ message: "Internal server error." });
     }
 }
-
 
 export const update = async (req, res) => {
     const { outfitType, clothesId, userId, day } = req.body;
@@ -227,7 +256,7 @@ export const update = async (req, res) => {
 }
 
 export const refresh = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
 
     try {
         const currentOutfits = await CurrentOutfits.findOne({ userId: id });
