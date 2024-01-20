@@ -42,10 +42,6 @@ const Outfits = () => {
     console.log('Bottom clicked');
   };
 
-  // const toggleLastWeekImages = () => {
-  //   setShowLastWeekSingleImage(!showLastWeekSingleImage);
-  // };
-
   const toggleThisWeekImages = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
   };
@@ -108,11 +104,6 @@ const Outfits = () => {
         <Typography variant="h4" align="center">
           This Week
         </Typography>
-        <Switch
-          checked={showThisWeekSingleImage}
-          onChange={toggleThisWeekImages}
-          color="primary"
-        />
         {showThisWeekSingleImage ? (
           <div>
             <img src={placeholderImg} alt="This week outfit" />
@@ -154,6 +145,13 @@ const Outfits = () => {
 
           </Select>
         </FormControl>
+
+        <Switch
+          checked={showThisWeekSingleImage}
+          onChange={toggleThisWeekImages}
+          color="primary"
+        />
+
       </Box>
     </Box>
   );
