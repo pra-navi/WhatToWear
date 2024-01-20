@@ -20,7 +20,7 @@ Despite some team members initially lacking familiarity with the MERN tech stack
 ## What we learned
 Through the development process, the team gained valuable insights into coordinating tasks, integrating frontend and backend components, and designing a cohesive user experience. It also served as an excellent opportunity to enhance skills in web development, database management, and teamwork. Moreover, this experience also provided some of us an opportunity to explore and become acquainted with a tech stack that was previously unfamiliar to us.
 
-## What's next for "WhatToWear?"
+## What's next for "whattowear"
 Future plans for "WhatToWear?" include:
 
 Weather Based Recommendations: Integrate a weather API to provide users with outfit suggestions based on the current weather conditions in their location.
