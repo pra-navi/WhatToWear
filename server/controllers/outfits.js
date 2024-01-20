@@ -74,24 +74,24 @@ export const getPrevOutfits = async (req, res) => {
     const { day , userId } = req.body;
 
     try {
-        const outfits = await CurrentOutfits.findOne({userId});
+        const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
 
         if(outfits){ 
 
-            if (day == "M") {
+            if (day === "M") {
                 getOutfit = outfits.lastM;
-            } else if (day == "Tu") {
+            } else if (day === "Tu") {
                 getOutfit = outfits.lastTu;
-            } else if (day == "W") {
+            } else if (day === "W") {
                 getOutfit = outfits.lastW;
-            } else if (day == "Th") {
-                getOutfit == outfits.lastTh;
-            } else if (day == "F") {
+            } else if (day === "Th") {
+                getOutfit = outfits.lastTh;
+            } else if (day === "F") {
                 getOutfit = outfits.lastF;
-            } else if (day == "Sa") {
+            } else if (day === "Sa") {
                 getOutfit = outfits.lastSa;
-            } else if (day = "Su") {
+            } else if (day === "Su") {
                 getOutfit = outfits.lastSu;
             } else {
                 res.json({ message : "Invalid day." });
@@ -111,24 +111,24 @@ export const getCurrOutfits = async (req, res) => {
     const { day , userId } = req.body;
 
     try {
-        const outfits = await CurrentOutfits.findOne({userId});
+        const outfits = await CurrentOutfits.findOne({ userId });
         let getOutfit = [];
 
         if(outfits){ 
 
-            if (day == "M") {
+            if (day === "M") {
                 getOutfit = outfits.M;
-            } else if (day == "Tu") {
+            } else if (day === "Tu") {
                 getOutfit = outfits.Tu;
-            } else if (day == "W") {
+            } else if (day === "W") {
                 getOutfit = outfits.W;
-            } else if (day == "Th") {
+            } else if (day === "Th") {
                 getOutfit == outfits.Th;
-            } else if (day == "F") {
+            } else if (day === "F") {
                 getOutfit = outfits.F;
-            } else if (day == "Sa") {
+            } else if (day === "Sa") {
                 getOutfit = outfits.Sa;
-            } else if (day = "Su") {
+            } else if (day === "Su") {
                 getOutfit = outfits.Su;
             } else {
                 res.json({ message : "Invalid day." });
