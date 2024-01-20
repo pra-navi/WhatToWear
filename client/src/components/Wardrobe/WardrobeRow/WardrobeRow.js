@@ -18,13 +18,15 @@ const style = {
     p: 4,
   };
 
-const WardrobeRow = ({rowName, addFunc}) => {
+const WardrobeRow = ({rowName, addFunc, clothesArr}) => {
     const classes = useStyles();
 
     
     const [openForm, setOpenForm] = React.useState(false);
     const handleOpen = () => setOpenForm(true);
     const handleClose = () => setOpenForm(false);
+
+    console.log(clothesArr);
 
     return (
         <>
