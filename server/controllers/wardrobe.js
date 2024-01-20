@@ -5,7 +5,21 @@ import FullOutfits from '../models/fullOutfits.js';
 
 export const addTop = async (req, res) => {
     console.log(req.body);
+    console.log(req.body.image);
 
+    try {
+        console.log("hello");
+        const newTop = new Tops({image: req.body.image});
+        console.log("hello2");
+        console.log(newTop);
+        await newTop.save();
+        const owner = await User.findById(ownerId);
+        owner.topId.push(newTop._id);
+        const updatedOwner = await User.findByIdAndUpdate(ownerId, owner, { new: true });
+        res.json(newTop); // return the top object
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
 }
 
 /*
