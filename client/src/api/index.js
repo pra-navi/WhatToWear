@@ -24,3 +24,4 @@ export const refresh = (id) => API.patch('/outfits/refresh', id); // id is of ty
 export const update = (outfitType, clothesId, userId, day) => API.patch(`/outfits/update`, { outfitType, clothesId, userId, day }); // all are of type string (outfitType is top/bottom/full) (day is M/Tu/W/Th/F/Sa/Su)
 
 export const addTop = (image) => API.post(`/wardrobe/addTop`, image);
+export const deleteTop = (topId) => API.delete(`/wardrobe/deleteTop/${topId}`);

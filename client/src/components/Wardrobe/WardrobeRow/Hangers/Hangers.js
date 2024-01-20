@@ -2,6 +2,8 @@ import React from 'react'
 import useStyles from './styles';
 import { ImageList, ImageListItem, ImageListItemBar, IconButton, Divider } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { deleteTop } from '../../../../api';
+import { useDispatch } from 'react-redux';
 
 /**
  * @author https://v4.mui.com/components/image-list/ 
@@ -9,8 +11,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const Hangers = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
-    const deleteFunc = () => {console.log("hangers");}
+    const deleteFunc = async () => {
+      try {
+        console.log("hangers1");
+        await dispatch(deleteTop('65abd8c6435eda6301c6d279'));
+        console.log("hangers2");
+      } catch(error) {
+        console.log(error);
+      }
+    }
 
     return (
         <div className={classes.root}>
