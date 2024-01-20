@@ -18,13 +18,16 @@ const style = {
     p: 4,
   };
 
-const WardrobeRow = ({rowName, addFunc}) => {
+const WardrobeRow = ({rowName, addFunc, clothesArr}) => {
     const classes = useStyles();
 
     
     const [openForm, setOpenForm] = React.useState(false);
     const handleOpen = () => setOpenForm(true);
     const handleClose = () => setOpenForm(false);
+
+    console.log(rowName);
+    console.log(clothesArr);
 
     return (
         <>
@@ -37,7 +40,7 @@ const WardrobeRow = ({rowName, addFunc}) => {
                         </IconButton>
                     </div>
                 </div>
-                <Hangers/> 
+                <Hangers clothesArr={clothesArr}/> 
             </Paper>
             <Modal
                 open={openForm}

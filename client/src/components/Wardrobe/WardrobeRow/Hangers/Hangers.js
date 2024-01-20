@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
  * @author https://v4.mui.com/components/image-list/ 
  */
 
-const Hangers = () => {
+const Hangers = ({rowName}) => {
     const classes = useStyles();
 
     const deleteFunc = () => {console.log("hangers");}

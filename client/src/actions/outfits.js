@@ -24,8 +24,9 @@ export const update = (outfitType, clothesId, userId, day) => async (dispatch) =
 
 export const getTops = (userId) => async (dispatch) => {
     try {
+        console.log("actions 1");
         const { data } = await api.getAllTops(userId);
-        
+        console.log("actions 2");
         dispatch({ type: GET_TOP, payload: data });
         return data;
     } catch (error) {
