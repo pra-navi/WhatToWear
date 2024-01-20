@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FormControl,InputLabel, Select, MenuItem, Typography, Box, Switch, Button,
   Icon, IconButton, Menu, Grid, Card, CardActionArea, CardMedia, FormGroup, 
   FormControlLabel
 } from '@mui/material';
+import { getTops, getBottoms, getCurr, getFull, getPrev, refresh, update } from '../../actions/outfits';
+import { useDispatch, useSelector } from 'react-redux';
+import { getState } from 'redux';
 
 const Outfits = () => {
   const [currTop, setCurrTop] = useState([]);
@@ -11,17 +14,24 @@ const Outfits = () => {
   const [currBottom, setCurrBottom] = useState([]);
   const [lastBottom, setLastBottom] = useState([]);
   const [currFull, setCurrFull] = useState([]);
-  const [lastFull, setLastFull] = useState([]);
   const [currDay, setCurrDay] = useState([]);
   const [lastDay, setLastDay] = useState([]);
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openTop, setOpenTop] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
   const [openFull, setOpenFull] = useState(false);
   const [showLastWeekSingleImage, setShowLastWeekSingleImage] = useState(false);
   const [showThisWeekSingleImage, setShowThisWeekSingleImage] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  const dispatch = useDispatch();
+  const { outfits } = useSelector((state) => state.outfits);
 
+  const user = JSON.parse(localStorage.getItem('profile'));
+  // const setOutfits = () => {
+    // sets both current and last week's outfits upon opening
+    // req: userId, day
+    // returns type, top, bottom, full 
+  // }
   const placeholderTops = [
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455762/item/goods_03_455762.jpg?width=200',
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466087/sub/goods_466087_sub14.jpg?width=200',
@@ -45,8 +55,29 @@ const Outfits = () => {
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466523/sub/goods_466523_sub14.jpg?width=200'
   ];
 
-  const handleLastDayChange = (event) => {
-    setLastDay(event.target.value);
+  // const handleTopClick = () => {
+    // open pop-up
+  // }
+  // const handleBottomClick = () => {
+    // open pop-up
+  // }
+
+  const placeholderImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png';
+  const handleLastDayChange = async (event) => {
+    const newLastDay = event.target.value;
+    setLastDay(newLastDay);
+    try {
+      const data = await dispatch(getPrev({ day: newLastDay, userId: user.result._id}));
+      if (data[0][0] === "1") {
+        setLastTop(data[3][1]);
+        setLastBottom([]);
+      } else {
+        setLastTop(data[1][1]);
+        setLastBottom(data[2][1]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCurrDayChange = (event) => {
@@ -94,8 +125,9 @@ const Outfits = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
   };
 
-  const handleRefreshClick = () => {
-    setRefresh(!refresh);
+  const handleRefreshClick = async () => {
+    const data = await dispatch(refresh(user.result._id));
+    console.log(data);
   };
 
   const ImageMenu = ({ type, images }) => {
@@ -105,11 +137,11 @@ const Outfits = () => {
           <Grid item key={index} xs={12} sm={12} md={12} lg={2}>
             <Card>
               <CardActionArea onClick={() => {
-                if (type == 'top') {
+                if (type === 'top') {
                   handleTopSelect(image);
-                } else if (type == 'bottom') {
+                } else if (type === 'bottom') {
                   handleBottomSelect(image);
-                } else if (type == 'full') {
+                } else if (type === 'full') {
                   handleFullSelect(image);
                 }
                 }}>
@@ -142,12 +174,12 @@ const Outfits = () => {
 
         <div>
           <IconButton disabled>
-            <img src={placeholderTops[0]} alt='Top picture' />
+            <img src={lastTop.length > 0 ? lastTop : placeholderImg} alt='Top picture' />
           </IconButton>
         </div>
         <div>
           <IconButton disabled>
-          <img src={placeholderBottoms[0]} alt='Bottom picture' />
+          <img src={lastBottom.length > 0 ? lastBottom : placeholderImg} alt='Bottom picture' />
           </IconButton>
         </div>
         <FormControl sx={{marginTop: '20px'}}>

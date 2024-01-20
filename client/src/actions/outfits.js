@@ -6,6 +6,7 @@ export const refresh = (id) => async (dispatch) => {
         const { data } = await api.refresh(id);
 
         dispatch({ type: UPDATE, payload: data });
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -27,7 +28,7 @@ export const getTops = (userId) => async (dispatch) => {
         const { data } = await api.getAllTops(userId);
         console.log("actions 2");
         dispatch({ type: GET_TOP, payload: data });
-        return data; //ADD THIS
+        return data;
     } catch (error) {
         console.log(error.message);
     }
@@ -55,11 +56,13 @@ export const getFull = (userId) => async (dispatch) => {
     }
 };
 
-export const getPrev = (day, userId) => async (dispatch) => {
+export const getPrev = ({ day, userId }) => async (dispatch) => {
     try {
         const { data } = await api.getPrevOutfits(day, userId);
         
         dispatch({ type: GET_PREV, payload: data });
+
+        return data;
     } catch (error) {
         console.log(error.message);
     }
@@ -70,6 +73,7 @@ export const getCurr = (day, userId) => async (dispatch) => {
         const { data } = await api.getCurrOutfits(day, userId);
         
         dispatch({ type: GET_CURR, payload: data });
+        return data;
     } catch (error) {
         console.log(error.message);
     }
