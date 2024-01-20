@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
   FormControl,InputLabel, Select, MenuItem, Typography, Box, Switch, Button,
-  Icon, IconButton, Menu, Grid, Card, CardActionArea, CardMedia
+  Icon, IconButton, Menu, Grid, Card, CardActionArea, CardMedia, FormGroup, 
+  FormControlLabel
 } from '@mui/material';
 
 const Outfits = () => {
@@ -16,6 +17,7 @@ const Outfits = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openTop, setOpenTop] = useState(false);
   const [openBottom, setOpenBottom] = useState(false);
+  const [openFull, setOpenFull] = useState(false);
   const [showLastWeekSingleImage, setShowLastWeekSingleImage] = useState(false);
   const [showThisWeekSingleImage, setShowThisWeekSingleImage] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -40,7 +42,7 @@ const Outfits = () => {
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466542/item/goods_54_466542.jpg?width=200',
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/464787/sub/goods_464787_sub14.jpg?width=200',
     'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/463509/item/goods_09_463509.jpg?width=200',
-    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/463509/item/goods_09_463509.jpg?width=200'
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466523/sub/goods_466523_sub14.jpg?width=200'
   ];
 
   const handleLastDayChange = (event) => {
@@ -61,6 +63,11 @@ const Outfits = () => {
     setOpenBottom(true);
   }
 
+  const handleFullClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpenFull(true);
+  }
+
   const handleTopSelect = (top) => {
     setCurrTop(top);
     handleClose();
@@ -71,10 +78,16 @@ const Outfits = () => {
     handleClose();
   }
 
+  const handleFullSelect = (full) => {
+    setCurrFull(full);
+    handleClose();
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
     setOpenTop(false);
     setOpenBottom(false);
+    setOpenFull(false);
   }
 
   const toggleThisWeekImages = () => {
@@ -93,10 +106,13 @@ const Outfits = () => {
             <Card>
               <CardActionArea onClick={() => {
                 if (type == 'top') {
-                  handleTopSelect(image)
+                  handleTopSelect(image);
                 } else if (type == 'bottom') {
-                  handleBottomSelect(image)
-                }}}>
+                  handleBottomSelect(image);
+                } else if (type == 'full') {
+                  handleFullSelect(image);
+                }
+                }}>
                 <CardMedia
                   component="img"
                   alt={`Image ${index + 1}`}
@@ -168,9 +184,32 @@ const Outfits = () => {
         </Typography>
 
         { showThisWeekSingleImage ? (
-          <div>
-            <img src={placeholderFulls[0]} alt="This week outfit" />
-          </div>
+          <>
+            <div>
+              <IconButton
+                onClick={handleFullClick}
+                aria-controls={openFull ? 'fulls-menu' : undefined}
+              >
+              <img
+                src={currFull}
+                alt='Click to choose a one-piece' />
+              </IconButton>
+            </div>
+
+            <Menu
+              anchorEl={anchorEl}
+              id="fulls-menu"
+              open={openFull}
+              onClose={handleClose}
+              onClick={handleClose}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+            >
+              <MenuItem onClick={handleClose}>
+                <ImageMenu type={'full'} images={placeholderFulls} />
+              </MenuItem>
+            </Menu>
+          </>
         ) : (
           <>
             <div>
@@ -245,12 +284,20 @@ const Outfits = () => {
         </FormControl>
       </Box>
 
-      <Switch
-        checked={showThisWeekSingleImage}
-        onChange={toggleThisWeekImages}
-        color="primary"
-      />
-
+      <FormGroup>
+        <FormControlLabel 
+          control={
+            <Switch
+              checked={showThisWeekSingleImage}
+              onChange={toggleThisWeekImages}
+              color="primary"
+            />
+          }
+          label = {showThisWeekSingleImage ? "1-piece" : "2-piece"}
+          labelPlacement="bottom"
+        />
+      </FormGroup>
+      
       <Box
       style={{
         display: 'flex',
