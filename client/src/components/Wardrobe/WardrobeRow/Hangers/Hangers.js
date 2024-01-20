@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from './styles';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton, Divider } from '@material-ui/core';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 /**
