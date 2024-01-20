@@ -17,7 +17,7 @@ export const fetchUser = (id) => API.get(`/user/profile/${id}`);
 export const getAllTops = (userId) => API.get('/outfits/getAllTops' , userId); //userId is a string
 export const getAllBottoms = (userId) => API.get('/outfits/getAllBottoms' , userId); //userId is a string
 export const getAllFull = (userId) => API.get('/outfits/getAllFull' , userId); //userId is a string
-export const getPrevOutfits = (day, userId) => API.get('outfits/getPrevOutfits', {day, userId}) //day is passed as param from frontend
+export const getPrevOutfits = (day, userId) => API.get('/outfits/getPrevOutfits', {day, userId}) //day is passed as param from frontend
 export const getCurrOutfits = (day, userId) => API.get('/outfits/getCurrOutfits', {day, userId}) //day is passed as param from frontend
 
 export const refresh = (id) => API.patch('/outfits/refresh', id); // id is of type string in a the req body
