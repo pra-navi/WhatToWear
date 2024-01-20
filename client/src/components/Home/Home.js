@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className={classes.container}>
       <Typography variant="h3" component="h2" className={classes.homeText}>
-        Home
+        Let's Style You Up!
       </Typography>
 
       <Divider style={{ margin: '20px 0 20px 0' }} />
