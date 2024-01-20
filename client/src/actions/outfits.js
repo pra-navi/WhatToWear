@@ -23,9 +23,11 @@ export const update = (outfitType, clothesId, userId, day) => async (dispatch) =
 
 export const getTops = (userId) => async (dispatch) => {
     try {
+        console.log("actions 1");
         const { data } = await api.getAllTops(userId);
-        
+        console.log("actions 2");
         dispatch({ type: GET_TOP, payload: data });
+        return data; //ADD THIS
     } catch (error) {
         console.log(error.message);
     }
@@ -36,6 +38,7 @@ export const getBottoms = (userId) => async (dispatch) => {
         const { data } = await api.getAllBottoms(userId);
         
         dispatch({ type: GET_BOTTOM, payload: data });
+        return data;
     } catch (error) {
         console.log(error.message);
     }
@@ -46,6 +49,7 @@ export const getFull = (userId) => async (dispatch) => {
         const { data } = await api.getAllFull(userId);
         
         dispatch({ type: GET_FULL, payload: data });
+        return data;
     } catch (error) {
         console.log(error.message);
     }

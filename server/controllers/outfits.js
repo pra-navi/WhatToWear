@@ -10,11 +10,13 @@ import Users from '../models/user.js';
 import fullOutfits from '../models/fullOutfits.js';
 
 export const getAllTops = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.params;
+    console.log("controller1");
 
     try {
-        const tops = await Users.findById(userId);
-        const topIds = tops.topId;
+        const currentUser = await Users.findById(userId);
+        const topIds = currentUser.topId;
+        console.log(topIds);
 
         let topEntry = [];
 
@@ -31,7 +33,7 @@ export const getAllTops = async (req, res) => {
 }
 
 export const getAllBottoms = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.params;
 
     try {
         const bottoms = await Users.findById(userId);
@@ -51,8 +53,8 @@ export const getAllBottoms = async (req, res) => {
     }
 }
 
-export const getAllFull = async (req, res) => {
-    const { userId } = req.body;
+export const getAllFulls = async (req, res) => {
+    const { userId } = req.params;
 
     try {
         const full = await Users.findById(userId);
