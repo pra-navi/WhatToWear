@@ -9,7 +9,7 @@ import Tops from '../models/tops.js';
 import Users from '../models/user.js';
 
 export const getAllTops = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     try {
         const tops = await Users.findById(userId);
@@ -30,7 +30,7 @@ export const getAllTops = async (req, res) => {
 }
 
 export const getAllBottoms = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     try {
         const bottoms = await Users.findById(userId);
@@ -51,7 +51,7 @@ export const getAllBottoms = async (req, res) => {
 }
 
 export const getAllFull = async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.query;
 
     try {
         const full = await Users.findById(userId);
@@ -71,7 +71,7 @@ export const getAllFull = async (req, res) => {
 }       
 
 export const getPrevOutfits = async (req, res) => {
-    const { day , userId } = req.body;
+    const { day , userId } = req.query;
 
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
@@ -79,19 +79,19 @@ export const getPrevOutfits = async (req, res) => {
 
         if(outfits){ 
 
-            if (day === "M") {
+            if (day === "lastM") {
                 getOutfit = outfits.lastM;
-            } else if (day === "Tu") {
+            } else if (day === "lastTu") {
                 getOutfit = outfits.lastTu;
-            } else if (day === "W") {
+            } else if (day === "lastW") {
                 getOutfit = outfits.lastW;
-            } else if (day === "Th") {
+            } else if (day === "lastTh") {
                 getOutfit = outfits.lastTh;
-            } else if (day === "F") {
+            } else if (day === "lastF") {
                 getOutfit = outfits.lastF;
-            } else if (day === "Sa") {
+            } else if (day === "lastSa") {
                 getOutfit = outfits.lastSa;
-            } else if (day === "Su") {
+            } else if (day === "lastSu") {
                 getOutfit = outfits.lastSu;
             } else {
                 res.status(400).json({ message: "Invalid day." });
@@ -99,6 +99,8 @@ export const getPrevOutfits = async (req, res) => {
         } else {
             res.json({ message : "Invalid outfit." });
         }
+
+        console.log(getOutfit);
 
         res.status(200).json(getOutfit);
 
@@ -108,7 +110,7 @@ export const getPrevOutfits = async (req, res) => {
 }
 
 export const getCurrOutfits = async (req, res) => {
-    const { day , userId } = req.body;
+    const { day , userId } = req.query;
 
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
@@ -131,10 +133,10 @@ export const getCurrOutfits = async (req, res) => {
             } else if (day === "Su") {
                 getOutfit = outfits.Su;
             } else {
-                console.log("Invalid day.");
+                res.status(400).json({ message: "Invalid day." });
             }
         } else {
-            console.log("Invalid outfit.");
+            res.json({ message : "Invalid outfit." });
         }
 
         res.status(200).json(getOutfit);
