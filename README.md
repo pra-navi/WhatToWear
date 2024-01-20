@@ -30,4 +30,4 @@ Social Sharing: Allow users to share their outfits with their friends so that th
 Randomised Outfit Recommendation: Recommend a random outfit to the user 
 
 ## Built With
-MongoDB , Express.js, React, Node.js
+MongoDB , Express.js, React, Node.js (MERN)
