@@ -7,6 +7,7 @@ import {
   Typography,
   Box,
   Switch,
+  Button,
 } from '@mui/material';
 
 const Outfits = () => {
@@ -21,6 +22,7 @@ const Outfits = () => {
   const [open, setOpen] = useState(false);
   const [showLastWeekSingleImage, setShowLastWeekSingleImage] = useState(false);
   const [showThisWeekSingleImage, setShowThisWeekSingleImage] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const placeholderImg =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png';
@@ -46,6 +48,11 @@ const Outfits = () => {
     setShowThisWeekSingleImage(!showThisWeekSingleImage);
   };
 
+  //logic
+  const handleRefreshClick = () => {
+    setRefresh(!refresh);
+  };
+
   return (
     <Box style={{ display: 'flex', justifyContent: 'center' }}>
       <Box
@@ -58,7 +65,7 @@ const Outfits = () => {
         <Typography variant="h4" align="center">
           Last Week
         </Typography>
-        
+
         {showLastWeekSingleImage ? (
           <div>
             <img src={placeholderImg} alt="Last week outfit" />
@@ -142,7 +149,7 @@ const Outfits = () => {
             <MenuItem value={'F'}>Friday</MenuItem>
             <MenuItem value={'Sa'}>Saturday</MenuItem>
             <MenuItem value={'Su'}>Sunday</MenuItem>
-
+          
           </Select>
         </FormControl>
 
@@ -151,8 +158,22 @@ const Outfits = () => {
           onChange={toggleThisWeekImages}
           color="primary"
         />
-
       </Box>
+      <Box
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end', 
+        marginTop: '20px',
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        }}
+>
+  <Button variant="contained" onClick={handleRefreshClick}>
+    Refresh
+  </Button>
+</Box>
     </Box>
   );
 };
