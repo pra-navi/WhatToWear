@@ -26,3 +26,5 @@ const outfitsReducer = (state = { lastM: [], lastTu: [], lastW: [], lastTh: [], 
             return state;
     }
 };
+
+export default outfitsReducer;

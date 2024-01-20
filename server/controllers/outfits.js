@@ -188,7 +188,7 @@ export const update = async (req, res) => {
 
             await currentOutfits.save();
 
-            res.json({ message: "User updated successfully." })
+            res.json(currentOutfits);
             
         } else {
             res.json({ message: 'User not found.' });
@@ -227,7 +227,7 @@ export const refresh = async (req, res) => {
 
             await currentOutfits.save();
 
-            res.json({ message: 'Refreshed successfully.' });
+            res.json(currentOutfits);
         } else {
             res.json({ message: 'User not found.' });
         }
