@@ -3,7 +3,7 @@ import useStyles from './styles';
 import { Paper, Typography, Divider, IconButton, Modal, Box, Button } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { addTop } from '../../../../actions/wardrobe';
+import { addTop, addBottom, addFull } from '../../../../actions/wardrobe';
 
 /**
  * @author https://mui.com/material-ui/react-modal/
@@ -38,10 +38,17 @@ const Form = ({addFunc, formName}) => {
         }
 
         try {
-            const userId = JSON.parse(localStorage.getItem('profile'))?.result?._id;
-            // console.log(userId);
             if (formName === "Tops") {
+                console.log(formName);
                 await dispatch(addTop(image));
+            } else if (formName === "Bottoms") {
+                console.log(formName);
+                await dispatch(addBottom(image));
+            } else if (formName === "FullOutfits") {
+                console.log(formName);
+                await dispatch(addFull(image));
+            } else {
+                alert('Something wrong');
             }
         } catch(error) {
             console.log(error);
