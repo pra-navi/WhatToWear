@@ -17,6 +17,4 @@ router.get('/getPrevOutfits' , getPrevOutfits);
 
 router.get('/getCurrOutfits', getCurrOutfits);
 
-router.patch('/update', update);
-
 export default router;

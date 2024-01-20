@@ -70,45 +70,6 @@ export const getAllFull = async (req, res) => {
     }
 }       
 
-export const refresh = async (req, res) => {
-    const { id } = req.body;
-
-    try {
-        const currentOutfits = await CurrentOutfits.findOne({ userId: id });
-        if (currentOutfits) {
-            currentOutfits.lastM = [...currentOutfits.M];
-            currentOutfits.M = ["2", "", "", ""];
-
-            currentOutfits.lastTu = [...currentOutfits.Tu];
-            currentOutfits.Tu = ["2", "", "", ""];
-
-            currentOutfits.lastW = [...currentOutfits.Tu];
-            currentOutfits.W = ["2", "", "", ""];
-
-            currentOutfits.lastTh = [...currentOutfits.Tu];
-            currentOutfits.Th = ["2", "", "", ""];
-
-            currentOutfits.lastF = [...currentOutfits.Tu];
-            currentOutfits.F = ["2", "", "", ""];
-
-            currentOutfits.lastSa = [...currentOutfits.Tu];
-            currentOutfits.Sa = ["2", "", "", ""];
-
-            currentOutfits.lastSu = [...currentOutfits.Tu];
-            currentOutfits.Su = ["2", "", "", ""];
-
-            await currentOutfits.save();
-
-            res.json({ message: 'Refreshed successfully.' });
-        } else {
-            res.json({ message: 'User not found.' });
-        }
-    } catch (error) {
-        res.status(404).json({ message: error.message });
-    }
-}
-
-
 export const getPrevOutfits = async (req, res) => {
     const { day , userId } = req.body;
 
@@ -240,3 +201,42 @@ export const update = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+export const refresh = async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        const currentOutfits = await CurrentOutfits.findOne({ userId: id });
+        if (currentOutfits) {
+            currentOutfits.lastM = [...currentOutfits.M];
+            currentOutfits.M = ["2", "", "", ""];
+
+            currentOutfits.lastTu = [...currentOutfits.Tu];
+            currentOutfits.Tu = ["2", "", "", ""];
+
+            currentOutfits.lastW = [...currentOutfits.Tu];
+            currentOutfits.W = ["2", "", "", ""];
+
+            currentOutfits.lastTh = [...currentOutfits.Tu];
+            currentOutfits.Th = ["2", "", "", ""];
+
+            currentOutfits.lastF = [...currentOutfits.Tu];
+            currentOutfits.F = ["2", "", "", ""];
+
+            currentOutfits.lastSa = [...currentOutfits.Tu];
+            currentOutfits.Sa = ["2", "", "", ""];
+
+            currentOutfits.lastSu = [...currentOutfits.Tu];
+            currentOutfits.Su = ["2", "", "", ""];
+
+            await currentOutfits.save();
+
+            res.json({ message: 'Refreshed successfully.' });
+        } else {
+            res.json({ message: 'User not found.' });
+        }
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
