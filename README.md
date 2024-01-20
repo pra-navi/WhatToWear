@@ -1,11 +1,11 @@
 # whattowear
 ## Inspiration
-The inspiration behind "WhatToWear?" stemmed from the desire to reduce the impact of fast fashion. With the rise of mass produced and cheap clothing, a lot of users are tempted to purchase before checking their wardrobe for similar outfits. To reduce this friction, WhatToWear is an in-pocket solution that makes it easily available to all users as a constant reminder to check the website (and their e-Wardrobe) to cross reference their purchase choices. We understand that wardrobes are either too far away from users or are filled with too many outfits for users to remember or have the time to look through. Hence, this could potentially reduce the issue of purchasing similar outfits (a common issue among those with very consistent taste in outfit choices).
+The inspiration behind "whattowear" stemmed from the desire to reduce the impact of fast fashion. With the rise of mass produced and cheap clothing, a lot of users are tempted to purchase before checking their wardrobe for similar outfits. To reduce this friction, WhatToWear is an in-pocket solution that makes it easily available to all users as a constant reminder to check the website (and their e-Wardrobe) to cross reference their purchase choices. We understand that wardrobes are either too far away from users or are filled with too many outfits for users to remember or have the time to look through. Hence, this could potentially reduce the issue of purchasing similar outfits (a common issue among those with very consistent taste in outfit choices).
 
 Additionally, we recognise that a lot of time is spent daily to avoid repeated outfits when meeting the same people, spending excessive time contemplating daily attire and planning future outfits. This is especially important for users, like students who go to weekly classes and mistakenly wear the same outfit each class. Hence, our website aims to also enhance the efficiency and creativity in daily outfit selection. 
 
 ## How we built it
-The team collaborated on developing the "WhatToWear?" app, focusing on different aspects: 
+The team collaborated on developing the "whattowear" app, focusing on different aspects: 
 We coordinated and discussed the design of the website, the user flow, the database and the different logics to be implemented.
 Some members of the team worked on the frontend and the backend of the website at the same time, while some did only the frontend or the backend and thereafter integrated it together. We also saved the data in both the MongoDB and the localStorage for easier reference to the data in the frontend logic.
 
