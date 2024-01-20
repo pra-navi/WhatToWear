@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem, Input, Typography, Box } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, Input, Typography, Box, Icon, IconButton, Menu, Grid, Card, CardActionArea, CardMedia } from '@mui/material';
 
 const Outfits = () => {
   const [currTop, setCurrTop] = useState([]); // 1-piece will be considered a top
@@ -10,7 +10,9 @@ const Outfits = () => {
   const [lastFull, setLastFull] = useState([]);
   const [currDay, setCurrDay] = useState([]);
   const [lastDay, setLastDay] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openTop, setOpenTop] = useState(false);
+  const [openBottom, setOpenBottom] = useState(false);
 
   // const setOutfits = () => {
     // sets both current and last week's outfits upon opening
@@ -31,7 +33,24 @@ const Outfits = () => {
 
   // reset week button
 
-  const placeholderImg = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Black.png/220px-Black.png';
+  const placeholderTop = 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455762/item/goods_03_455762.jpg?width=200';
+  const placeholderBottom = 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/468841/item/goods_05_468841.jpg?width=200';
+
+  const placeholderTops = [
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455762/item/goods_03_455762.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466087/sub/goods_466087_sub14.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/458355/item/goods_01_458355.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/457479/item/goods_18_457479.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/464437/item/goods_00_464437.jpg?width=200'
+  ];
+  const placeholderBottoms = [
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/468841/item/goods_05_468841.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/464887/sub/goods_464887_sub14.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/466384/sub/goods_466384_sub14.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/464912/sub/goods_464912_sub14.jpg?width=200',
+    'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/464945/sub/goods_464945_sub14.jpg?width=200'
+  ];
+
   const handleLastDayChange = (event) => {
     setLastDay(event.target.value);
   };
@@ -40,14 +59,57 @@ const Outfits = () => {
     setCurrDay(event.target.value);
   };
 
-  const handleTopClick = () => {
-    console.log("Top clicked");
-    setOpen(true);
+  const handleTopClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpenTop(true);
   }
 
-  const handleBottomClick = () => {
-    console.log("Bottom clicked");
+  const handleBottomClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpenBottom(true);
   }
+
+  const handleTopSelect = (top) => {
+    setCurrTop(top);
+    handleClose();
+  }
+
+  const handleBottomSelect = (bottom) => {
+    setCurrBottom(bottom);
+    handleClose();
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setOpenTop(false);
+    setOpenBottom(false);
+  }
+
+  const ImageMenu = ({ type, images }) => {
+    return (
+      <Grid container spacing={2}>
+        {images.map((image, index) => (
+          <Grid item key={index} xs={12} sm={12} md={12} lg={2}>
+            <Card>
+              <CardActionArea onClick={() => {
+                if (type == 'top') {
+                  handleTopSelect(image)
+                } else if (type == 'bottom') {
+                  handleBottomSelect(image)
+                }}}>
+                <CardMedia
+                  component="img"
+                  alt={`Image ${index + 1}`}
+                  height="140"
+                  image={image}
+                />
+              </CardActionArea>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  };
 
   return (
     <Box style={{ display: 'flex', justifyContent:'center' }}>
@@ -57,8 +119,16 @@ const Outfits = () => {
         marginRight: '15%'
       }}>       
         <Typography variant="h4" align="center">Last Week</Typography>
-        <div><img src={placeholderImg} alt='Top picture' /></div>
-        <div><img src={placeholderImg} alt='Bottom picture' /></div>
+        <div>
+          <IconButton disabled>
+          <img src={placeholderTop} alt='Top picture' />
+          </IconButton>
+        </div>
+        <div>
+          <IconButton disabled>
+          <img src={placeholderBottom} alt='Bottom picture' />
+          </IconButton>
+        </div>
         <FormControl sx={{marginTop: '20px'}}>
         <InputLabel id="lastWeekDayLabel">Day</InputLabel>     
           <Select
@@ -86,17 +156,51 @@ const Outfits = () => {
       }}>
         <Typography variant="h4" align="center">This Week</Typography>
         <div>
-          <img
-            src={placeholderImg}
+          <IconButton
             onClick={handleTopClick}
-            alt='Top picture' />
+            aria-controls={openTop ? 'tops-menu' : undefined}
+          >
+            <img
+              src={currTop}
+              alt='Top picture' />
+            </IconButton>
         </div>
+        <Menu
+          anchorEl={anchorEl}
+          id="tops-menu"
+          open={openTop}
+          onClose={handleClose}
+          onClick={handleClose}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        >
+          <MenuItem onClick={handleClose}>
+            <ImageMenu type={'top'} images={placeholderTops} />
+          </MenuItem>
+        </Menu>
         <div>
-          <img
-            src={placeholderImg}
+          <IconButton
             onClick={handleBottomClick}
-            alt='Bottom picture' />
+            aria-controls={openBottom ? 'bottoms-menu' : undefined}
+          >
+            <img
+              src={currBottom}
+              alt='Bottom picture' />
+          </IconButton>
           </div>
+          <Menu
+            anchorEl={anchorEl}
+            id="bottoms-menu"
+            open={openBottom}
+            onClose={handleClose}
+            onClick={handleClose}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+          >
+            <MenuItem onClick={handleClose}>
+              <ImageMenu type={'bottom'} images={placeholderBottoms} />
+            </MenuItem>
+          </Menu>
         <FormControl sx={{marginTop: '20px'}}>
           <InputLabel id="currWeekDay">Day</InputLabel>
           <Select

@@ -1,5 +1,3 @@
-import bottoms from '../../../server/models/bottoms';
-import fullOutfits from '../../../server/models/fullOutfits';
 import { ADD_TOP, GET_BOTTOM, GET_TOP, GET_FULL} from '../constants/actions';
 
 const wardrobeReducer = (state = { tops: [], bottoms: [], fullOutfits: [] }, action) => {

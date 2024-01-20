@@ -38,6 +38,6 @@ export const signup = async (req, res) => {
         const token = jwt.sign({ username: result.username, id: result._id }, 'test');
         res.status(200).json({ result, token });
     } catch (error) {
-        res.status(500).json({ message: "Something went wrong." });
+        res.status(500).json({ message: error.message });
     }
 }
