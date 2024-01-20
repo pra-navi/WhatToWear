@@ -12,3 +12,9 @@ API.interceptors.request.use((req) => {
 export const logIn = (formData) => API.post('/user/login', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const fetchUser = (id) => API.get(`/user/profile/${id}`);
+
+export const getAllTops = (userId) => API.get('/outfits/getAllTops' , userId); //userId is a string
+export const getAllBottoms = (userId) => API.get('/outfits/getAllBottoms' , userId); //userId is a string
+export const getAllFull = (userId) => API.get('/outfits/getAllFull' , userId); //userId is a string
+export const getPrevOutfits = (day, userId) => API.get('outfits/getPrevOutfits', {day, userId}) //day is passed as param from frontend
+export const getCurrOutfits = (day, userId) => API.get('/outfits/getCurrOutfits', {day, userId}) //day is passed as param from frontend
