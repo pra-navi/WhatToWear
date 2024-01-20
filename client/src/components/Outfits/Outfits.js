@@ -174,7 +174,7 @@ const Outfits = () => {
 
         <div>
           <IconButton disabled>
-            <img src={lastTop.length > 0 ? lastTop : placeholderImg}} alt='Top picture' />
+            <img src={lastTop.length > 0 ? lastTop : placeholderImg} alt='Top picture' />
           </IconButton>
         </div>
         <div>
