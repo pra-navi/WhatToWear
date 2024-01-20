@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/users.js'
 import outfitRoutes from './routes/outfits.js'
+import wardrobeRoutes from './routes/wardrobe.js'
 
 const app = express()
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use('/user', userRoutes);
 app.use('/outfits', outfitRoutes);
+app.use('/wardrobe', wardrobeRoutes);
 
 const PORT = process.env.PORT || 5000; 
 

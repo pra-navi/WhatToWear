@@ -32,7 +32,7 @@ const WardrobeRow = ({rowName, addFunc}) => {
                 <div className={classes.leftRight}>
                     <Typography variant="h4" component="h2">{rowName}</Typography>
                     <div className={classes.atRight}>
-                        <IconButton size='large'onClick={handleOpen}>
+                        <IconButton size='medium'onClick={handleOpen}>
                             <AddCircleIcon />
                         </IconButton>
                     </div>
