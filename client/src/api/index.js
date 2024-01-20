@@ -12,3 +12,6 @@ API.interceptors.request.use((req) => {
 export const logIn = (formData) => API.post('/user/login', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const fetchUser = (id) => API.get(`/user/profile/${id}`);
+
+// export const createList = (newList) => API.post(`/list/createList`, newList);
+export const addTop = (image) => API.post(`/wardrobe/addTop`, image);

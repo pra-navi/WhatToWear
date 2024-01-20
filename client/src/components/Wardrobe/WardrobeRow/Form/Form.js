@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import useStyles from './styles';
 import { Paper, Typography, Divider, IconButton, Modal, Box, Button } from '@material-ui/core';
 import FileBase from 'react-file-base64';
+import { useDispatch } from 'react-redux';
+import { addTop } from '../../../../actions/wardrobe';
 
 /**
  * @author https://mui.com/material-ui/react-modal/
@@ -9,6 +11,7 @@ import FileBase from 'react-file-base64';
 
 const Form = ({addFunc, formName}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [image, setImage] = useState(null);
     const [fileMessage, setFileMessage] = useState('No image is choosen');
@@ -27,7 +30,22 @@ const Form = ({addFunc, formName}) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log(image);
+        e.preventDefault();
+
+        if (image === null) {
+            alert('Please select an image');
+            return;
+        }
+
+        try {
+            const userId = JSON.parse(localStorage.getItem('profile'))?.result?._id;
+            // console.log(userId);
+            if (formName === "Tops") {
+                await dispatch(addTop(image));
+            }
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -53,8 +71,8 @@ const Form = ({addFunc, formName}) => {
 
 export default Form;
 /*
-<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Please upload file in format jpg or png only. 
-                Recommended image ratio is 1:1
-            </Typography>
- */
+            if (formName === "Tops") {
+                const user = JSON.parse(localStorage.getItem('profile')); // need to explicitly update this
+                await dispatch(addTop(currentId, image));
+            }
+*/
