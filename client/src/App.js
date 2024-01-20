@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import Outfits from './components/Outfits/Outfits';
 import Wardrobe from './components/Wardrobe/Wardrobe';
 import { Container } from '@material-ui/core';
+import Auth from './components/Authentication/Auth';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' exact component={Home} />
             <Route path='/outfits' component={Outfits} />
             <Route path='/wardrobe' component={Wardrobe} />
+            <Route path='/authentication' component={() => (!JSON.parse(localStorage.getItem('profile')) ? <Auth /> : <Redirect to="/" />)} />
           </Switch>
         </Container>
       </Router>
