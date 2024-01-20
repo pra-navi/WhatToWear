@@ -177,7 +177,7 @@ export const getCurrOutfits = async (req, res) => {
 
             result.push([getOutfit[0]]);
             console.log(result);
-            if(getOutfit[1] == ""){
+            if(getOutfit[1] === ""){
                 result.push(["", ""]);
             } else {
                 const top = await Tops.findById(getOutfit[1]);
@@ -188,7 +188,7 @@ export const getCurrOutfits = async (req, res) => {
             }
             console.log(result);
 
-            if(getOutfit[2] == ""){
+            if(getOutfit[2] === ""){
                 result.push(["", ""]);
             } else {
                 const bottom = await Bottoms.findById(getOutfit[2]);
@@ -199,7 +199,7 @@ export const getCurrOutfits = async (req, res) => {
             }
             console.log(result);
 
-            if(getOutfit[3] == ""){
+            if(getOutfit[3] === ""){
                 result.push(["", ""]);
             } else {
                 const full = await fullOutfits.findById(getOutfit[3]);
@@ -209,7 +209,6 @@ export const getCurrOutfits = async (req, res) => {
                 result.push(temp);            
             }
             console.log(result);
-
 
             res.status(200).json(result);
         } else {
