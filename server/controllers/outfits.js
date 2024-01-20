@@ -16,7 +16,6 @@ export const getAllTops = async (req, res) => {
     try {
         const currentUser = await Users.findById(userId);
         const topIds = currentUser.topId;
-        console.log(topIds);
 
         let topEntry = [];
 
@@ -120,7 +119,8 @@ export const getPrevOutfits = async (req, res) => {
                 let temp = [];
                 temp.push(bottom._id);
                 temp.push(bottom.image);
-                result.push(temp);            }
+                result.push(temp);            
+            }
 
             if(getOutfit[3] == ""){
                 result.push(["", ""]);
@@ -145,9 +145,11 @@ export const getPrevOutfits = async (req, res) => {
 
 export const getCurrOutfits = async (req, res) => {
     const { day , userId } = req.query;
+    console.log(day, userId);
 
     try {
         const outfits = await CurrentOutfits.findOne({ userId });
+        console.log(outfits);
         let getOutfit = [];
         let result = [];
 
@@ -171,23 +173,43 @@ export const getCurrOutfits = async (req, res) => {
                 console.log("Invalid day.");
                 return res.status(400).json({ message: "Invalid day." });
             }
+            console.log(getOutfit);
 
             result.push([getOutfit[0]]);
-            const top = await Tops.findById(getOutfit[1]);
-            let temp = []; 
-            temp.push(top[0]);
-            temp.push(top[1]);
-            result.push(temp);
-            const bottom = await Bottoms.findById(getOutfit[2]);
-            let temp1 = []; 
-            temp1.push(bottom[0]);
-            temp1.push(bottom[1]);
-            result.push(temp1);
-            const full = await fullOutfits.findById(getOutfit[3]);
-            let temp2 = []; 
-            temp2.push(full[0]);
-            temp2.push(full[1]);
-            result.push(temp2);
+            console.log(result);
+            if(getOutfit[1] == ""){
+                result.push(["", ""]);
+            } else {
+                const top = await Tops.findById(getOutfit[1]);
+                let temp = [];
+                temp.push(top._id);
+                temp.push(top.image);
+                result.push(temp);
+            }
+            console.log(result);
+
+            if(getOutfit[2] == ""){
+                result.push(["", ""]);
+            } else {
+                const bottom = await Bottoms.findById(getOutfit[2]);
+                let temp = [];
+                temp.push(bottom._id);
+                temp.push(bottom.image);
+                result.push(temp);            
+            }
+            console.log(result);
+
+            if(getOutfit[3] == ""){
+                result.push(["", ""]);
+            } else {
+                const full = await fullOutfits.findById(getOutfit[3]);
+                let temp = [];
+                temp.push(full._id);
+                temp.push(full.image);
+                result.push(temp);            
+            }
+            console.log(result);
+
 
             res.status(200).json(result);
         } else {

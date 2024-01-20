@@ -70,7 +70,9 @@ export const getPrev = ({ day, userId }) => async (dispatch) => {
 
 export const getCurr = (day, userId) => async (dispatch) => {
     try {
+        console.log("param:", day, userId);
         const { data } = await api.getCurrOutfits(day, userId);
+        console.log(data);
         
         dispatch({ type: GET_CURR, payload: data });
         return data;
