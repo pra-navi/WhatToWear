@@ -1,4 +1,4 @@
-# WhatToWear
+# whattowear
 ## Inspiration
 The inspiration behind "WhatToWear?" stemmed from the desire to reduce the impact of fast fashion. With the rise of mass produced and cheap clothing, a lot of users are tempted to purchase before checking their wardrobe for similar outfits. To reduce this friction, WhatToWear is an in-pocket solution that makes it easily available to all users as a constant reminder to check the website (and their e-Wardrobe) to cross reference their purchase choices. We understand that wardrobes are either too far away from users or are filled with too many outfits for users to remember or have the time to look through. Hence, this could potentially reduce the issue of purchasing similar outfits (a common issue among those with very consistent taste in outfit choices).
 
