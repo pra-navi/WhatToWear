@@ -64,7 +64,11 @@ export const getAllFull = async (req, res) => {
             fullEntry.push(curr);
         }
 
-        res.status(200).json(fullEntry);        
+        res.status(200).json(fullEntry); 
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}       
 
 export const refresh = async (req, res) => {
     const { id } = req.body;
