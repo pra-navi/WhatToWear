@@ -7,7 +7,10 @@ Additionally, we recognise that a lot of time is spent daily to avoid repeated o
 ## How we built it
 The team collaborated on developing the "whattowear" app, focusing on different aspects: 
 We coordinated and discussed the design of the website, the user flow, the database and the different logics to be implemented.
+
 Some members of the team worked on the frontend and the backend of the website at the same time, while some did only the frontend or the backend and thereafter integrated it together. We also saved the data in both the MongoDB and the localStorage for easier reference to the data in the frontend logic.
+
+In the outfits page, we allow the users to view the outfits worn in the previous week side by side when the user chooses the outfits for the current week. By showcasing outfits worn in the previous week, we believe that users can visually compare and contrast their style choices, allowing them to notice patterns, experiment with different looks, and avoid repetition.
 
 ## Challenges we ran into
 Our team took some time to break down the different actions and the schema of the database before going into the code. We also encountered challenges in integrating the frontend with the backend, ensuring seamless communication between different components. Additionally, coordinating the development of various features posed logistical challenges that required effective communication and collaboration.
